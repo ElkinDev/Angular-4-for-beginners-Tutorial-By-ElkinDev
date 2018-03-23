@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = 'New FrontPage';
-	name='Lista 1'
+	title = 'Creador de Notas';
+	nameLists='Lista de Pagos Pendientes'
 	Lists=[
 	{id:1,name:'List one',description:'This is description 1',cost:5000},
 	{id:2,name:'List Two',description:'This is description 2',cost:5000},

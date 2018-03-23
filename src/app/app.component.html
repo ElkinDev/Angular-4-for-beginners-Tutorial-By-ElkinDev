@@ -1,20 +1,51 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    This is {{ title }}!
+    {{ title }}
   </h1>
 </div>
 
 <div class="container">
 
+	<div class="row">
+		<div class="col-md-4">
+			<p>
+	  			<input type="text" class="form-control" placeholder="Change the name List" [(ngModel)]="nameLists"  />
+			</p>
+			<h4>{{nameLists}}</h4>
+			<ul class="list-group">
+	  				<li class="list-group-item" *ngFor="let x of Lists">{{x.name}}</li>
+			</ul>
+		</div>
+		<div class="col-md-6">
+			<h4>Nuevas Notas</h4>
+			<div class="card">
+		  		<div class="card-body">
+		  			<div class="row">
 
-	<div class="col-md-4">
-	<p>
-  <input type="text" class="form-control" placeholder="" [(ngModel)]="name" />
-</p>
-	<h4>{{name}}</h4>
-		<ul class="list-group">
-  <li class="list-group-item" *ngFor="let x of Lists">{{x.name}}</li>
-</ul>
+		  				
+		  				<div class="col-lg-8">
+		  					<label for="{{nameList}}">List Name</label>
+	    					<input type="text" name="" class="form-control" [(ngModel)]="nameList" required>
+		  				</div>
+
+		  				<div class="col-lg-3">
+		  					<label for="{{CostList}}">Cost</label>
+	    					<input type="number" name="" class="form-control" [(ngModel)]="CostList" required>
+		  				</div>
+
+		  			</div>
+	    			<label for="{{descriptionList}}">Description</label>
+	    			<textarea [(ngModel)]="descriptionList" class="form-control" required maxlength="20">
+	    				
+	    			</textarea>
+	    			
+	  			</div>
+	  			<input type="submit" name="" value="Save" class="btn btn-primary form-control">
+	  			<br>
+	  			<input type="button" name="" value="Clear Form" class="btn btn-warning form-control">
+			</div>
+		</div>
 	</div>
+
 </div>

@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    {{ title }}
+    {{ title }} {{numberspage}}
   </h1>
 </div>
 
@@ -14,36 +14,71 @@
 			</p>
 			<h4>{{nameLists}}</h4>
 			<ul class="list-group">
-	  				<li class="list-group-item" *ngFor="let x of Lists">{{x.name}}</li>
+	  				<a href="#" class="list-group-item" (click)="editOneList(x)" *ngFor="let x of Lists" >{{x.id}} -- {{x.name}}</a>
 			</ul>
+			<br>
+			<a class="btn btn-primary text-center text-white" (click)="addNote()">AGREGAR NUEVA NOTA</a>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-8 align-center text-center" [hidden]="!show_form">
 			<h4>Nuevas Notas</h4>
 			<div class="card">
 		  		<div class="card-body">
-		  			<div class="row">
+		  			<form #formCreateNote='ngForm' (ngSubmit)="onSubmit(formCreateNote)">
+			  			<div class="row">
+			  				<div class="col-lg-8">
+			  					<label for="{{nameList}}">List Name</label>
+		    					<input type="text" name="nameList" class="form-control" [(ngModel)]="formCreateNote.nameList" required>
+			  				</div>
 
+			  				<div class="col-lg-3">
+			  					<label for="{{CostList}}">Cost</label>
+		    					<input type="number" name="CostList" class="form-control" [(ngModel)]="formCreateNote.CostList" required>
+			  				</div>
+
+			  			</div>
+		    			<label for="{{descriptionList}}">Description</label>
+		    			<textarea [(ngModel)]="formCreateNote.descriptionList" name="descriptionList" class="form-control" required maxlength="20">
+		    				
+		    			</textarea>
+	  				<input type="submit" value="Save" class="btn btn-primary form-control">
+	  				<br>
+	  				<input type="button" name="" value="Clear Form" (click)="cancel()" class="btn btn-warning form-control">
+		  			</form>
 		  				
-		  				<div class="col-lg-8">
-		  					<label for="{{nameList}}">List Name</label>
-	    					<input type="text" name="" class="form-control" [(ngModel)]="nameList" required>
-		  				</div>
-
-		  				<div class="col-lg-3">
-		  					<label for="{{CostList}}">Cost</label>
-	    					<input type="number" name="" class="form-control" [(ngModel)]="CostList" required>
-		  				</div>
-
-		  			</div>
-	    			<label for="{{descriptionList}}">Description</label>
-	    			<textarea [(ngModel)]="descriptionList" class="form-control" required maxlength="20">
-	    				
-	    			</textarea>
+		  				
 	    			
 	  			</div>
-	  			<input type="submit" name="" value="Save" class="btn btn-primary form-control">
 	  			<br>
-	  			<input type="button" name="" value="Clear Form" class="btn btn-warning form-control">
+			</div>
+		</div>
+		<div class="col-md-8 align-center text-center" [hidden]="!show_form_edit">
+			<h4>Editar Lista {{nameListEdit}}</h4>
+			<div class="card">
+		  		<div class="card-body">
+		  			<form #formEditNote='ngForm' (ngSubmit)="onSubmitEdit(formEditNote)">
+			  			<div class="row">
+			  			<input type="hidden" name="id" class="form-control" [(ngModel)]="editList.id" >
+			  				<div class="col-lg-8">
+			  					<label for="{{name}}">List Name</label>
+		    					<input type="text" name="name" class="form-control" [(ngModel)]="editList.name" required>
+			  				</div>
+
+			  				<div class="col-lg-3">
+			  					<label for="{{cost}}">Cost</label>
+		    					<input type="number" name="cost" class="form-control" [(ngModel)]="editList.cost" required>
+			  				</div>
+
+			  			</div>
+		    			<label for="{{description}}">Description</label>
+		    			<textarea [(ngModel)]="editList.description" name="description" class="form-control" required maxlength="20">
+		    				
+		    			</textarea>
+<!-- 		  				<input type="submit" value="Save" class="btn btn-primary form-control">
+		  				<br> -->
+		  				<input type="button" name="" value="Eliminar Nota" (click)="cancelEditOneList(editList.id)" class="btn btn-danger form-control">
+		  			</form>
+	  			</div>
+	  			
 			</div>
 		</div>
 	</div>

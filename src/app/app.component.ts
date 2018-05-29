@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @Component({
@@ -8,20 +11,21 @@ import {NgForm} from '@angular/forms';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	public formEditNote:any = {};
+	Lists
+	constructor(public afDB: AngularFireDatabase) {
+	   // this.Lists = afDB.list('notas').valueChanges();
+
+	 	this.Lists=afDB.list('/notas').valueChanges()
+ 		console.log(this.Lists);	
+
+
+
+	}
+
 	formCreateNote: NgForm
-	numberspage=5+'a'
 	title = 'Creador de Notas';
-	nameLists='Lista de Pagos Pendientes'
-	Lists=[
-	{id:1,name:'List one',description:'This is description 1',cost:5000},
-	{id:2,name:'List Two',description:'This is description 2',cost:5000},
-	{id:3,name:'List Three',description:'This is description 3',cost:5000},
-	{id:5,name:'List1 For',description:'This is description 4',cost:5000},
-	{id:6,name:'List2 For',description:'This is description 5',cost:5000},
-	{id:7,name:'List3 For',description:'This is description 6',cost:5000},
-	{id:8,name:'List5 For',description:'This is description 7',cost:1111},
-	]
+	nameLists='Lista de Notas'
+
 	newlist={id:null,name:null,description:null,cost:0}
 	editList={id:null,name:null,description:null,cost:0}
 	show_form=false
@@ -37,17 +41,22 @@ export class AppComponent {
 		this.show_form=false
 	}
 	onSubmit(formCreateNote: NgForm){
-	 console.log('se metioooo 2')
-
-		this.show_form_edit=false;
 		this.newlist.id=Math.floor(Math.random() * 588) + 615,
 		this.newlist.name=formCreateNote.value.nameList,
 		this.newlist.description=formCreateNote.value.descriptionList,
 		this.newlist.cost=formCreateNote.value.CostList,
-		this.Lists.push(this.newlist)
+
+	 	this.afDB.database.ref ('notas/' + this.newlist.id).set(this.newlist);
 		this.newlist={id:null,name:null,description:null,cost:0}
 		formCreateNote.reset()
 		this.show_form=false
+
+		/*this.show_form_edit=false;
+		
+		this.Lists.push(this.newlist)
+		this.newlist={id:null,name:null,description:null,cost:0}
+		formCreateNote.reset()
+		this.show_form=false*/
 	}
 	editOneList(data){
 		this.cacheList=data
@@ -61,14 +70,14 @@ export class AppComponent {
 		console.log('veaamoslo',this.formCreateNote)
 	}
 	cancelEditOneList(idlistDAta){
-		this.Lists.forEach((e,i)=>{
+	/*	this.Lists.forEach((e,i)=>{
 			 if(e.id===idlistDAta) {
 			 	console.log('see emteee paaa',this.cacheList)
 			 	this.Lists.splice(i,1)
 
 			 }
 
-		})
+		})*/
 	}
 
 	

@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    {{ title }} {{numberspage}}
+    {{ title }} 
   </h1>
 </div>
 
@@ -14,7 +14,7 @@
 			</p>
 			<h4>{{nameLists}}</h4>
 			<ul class="list-group">
-	  				<a href="#" class="list-group-item" (click)="editOneList(x)" *ngFor="let x of Lists" >{{x.id}} -- {{x.name}}</a>
+	  			<!-- 	<a href="#" class="list-group-item" (click)="editOneList(x)" *ngFor="let x of Lists  " >{{x.id}} {{x.name}}</a> -->
 			</ul>
 			<br>
 			<a class="btn btn-primary text-center text-white" (click)="addNote()">AGREGAR NUEVA NOTA</a>

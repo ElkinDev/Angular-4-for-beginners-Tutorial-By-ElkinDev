@@ -1,4 +1,4 @@
-# Basic Tutorial for Beginners  Angular 5/6
+# Basic Tutorial Angular 5/6 for Beginners  
 
 ## With Connection to firebase DataBase
 
